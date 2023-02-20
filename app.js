@@ -15,10 +15,9 @@ app.get("/static",(req, res) => {
   res.render("static");  
 });
 
-// Set Public Folder 
-const publicDirectory = path.join(__dirname,"./public");
-
-// Data will be transofrmed into Json File
+const publicDirectory = path.join(__dirname, "./assets");
+app.use(express.static(publicDirectory));
+//Get Jason Data format
 app.use(express.json());
 
 
