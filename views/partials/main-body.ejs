@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="form-container">
 
     <div class="left-column">
@@ -35,6 +35,130 @@
       })
       .catch((error) => console.error(error));
   }
-  </script>
+  </script> -->
   
+
+
+
+
+<!-- Version 2 -->
+
+
+
+<!-- Try 01 -->
+
+       <h1>AI Detector</h1>
+      <form id="input-form">
+        <label for="input">Enter text:</label>
+        <textarea id="input" name="input" rows="10" cols="50"></textarea>
+        <br>
+        <button type="submit">Detect AI</button>
+      </form>
+      <br>
+      <p id="result"></p>
+      <script>
+        const form = document.getElementById("input-form");
+        const result = document.getElementById("result");
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const input = document.getElementById("input").value;
+          fetch("https://rafay99-epic-hello-simpleai-chatgpt-detector--f8bb3b5.hf.space/run/predict", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ input })
+          })
+          .then(response => response.json())
+          .then(data => {
+            const isAi = data.is_ai;
+            result.textContent = isAi ? "AI detected" : "Human detected";
+          })
+          .catch(error => {
+            console.error(error);
+            result.textContent = "An error occurred while detecting AI";
+          });
+        });
+      </script>
+
+  
+
+<!-- Try 02 -->
+
+<!-- 
+          <h1>AI Detector</h1>
+          <form id="input-form">
+            <label for="input">Enter text:</label>
+            <textarea id="input" name="input" rows="10" cols="50"></textarea>
+            <br>
+            <button type="submit">Detect AI</button>
+          </form>
+          <br>
+          <p id="result"></p>
+          <script>
+            const form = document.getElementById("input-form");
+            const result = document.getElementById("result");
+            form.addEventListener("submit", (event) => {
+              event.preventDefault();
+              const input = document.getElementById("input").value;
+              fetch("https://api-inference.huggingface.co/models/rafay99/epic-hello-simpleai-chatgpt-detector", {
+                method: "POST",
+                headers: {
+                  "Authorization": "Bearer YOUR_API_KEY",
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ input })
+              })
+              .then(response => response.json())
+              .then(data => {
+                const isAi = data[0].label === 'AI';
+                result.textContent = isAi ? "AI detected" : "Human detected";
+              })
+              .catch(error => {
+                console.error(error);
+                result.textContent = "An error occurred while detecting AI";
+              });
+            });
+          </script> -->
+
+      
+
+<!-- try 03 -->
+    <!-- <h1>AI Text Detector</h1>
+    <form id="input-form">
+      <label for="input">Enter text:</label>
+      <textarea id="input" name="input" rows="10" cols="50"></textarea>
+      <br>
+      <button type="submit">Detect AI Text</button>
+    </form>
+    <br>
+    <p id="result"></p>
+    <script>
+      const form = document.getElementById("input-form");
+      const result = document.getElementById("result");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const input = document.getElementById("input").value;
+        fetch("https://rafay99-epic-hello-simpleai-chatgpt-detector--f8bb3b5.hf.space/run/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ data: [input] })
+        })
+        .then(response => response.json())
+        .then(data => {
+          const isAi = data.predictions[0][0] > 0.5;
+          result.textContent = isAi ? "AI Text Detected" : "Human Text Detected";
+        })
+        .catch(error => {
+          console.error(error);
+          result.textContent = "An error occurred while detecting AI text";
+        });
+      });
+    </script> -->
+
+
+
+
 

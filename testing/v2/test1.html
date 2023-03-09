@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AI Text Detector</title>
+  </head>
+  <body>
+    <h1>AI Text Detector</h1>
+    <form id="input-form">
+      <label for="input">Enter text:</label>
+      <textarea id="input" name="input" rows="10" cols="50"></textarea>
+      <br>
+      <button type="submit">Detect AI Text</button>
+    </form>
+    <br>
+    <p id="result"></p>
+    <script>
+      const form = document.getElementById("input-form");
+      const result = document.getElementById("result");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const input = document.getElementById("input").value;
+        fetch("https://rafay99-epic-hello-simpleai-chatgpt-detector--f8bb3b5.hf.space/run/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ data: [input] })
+        })
+        .then(response => response.json())
+        .then(data => {
+          const isAi = data.predictions[0][0] > 0.5;
+          result.textContent = isAi ? "AI Text Detected" : "Human Text Detected";
+        })
+        .catch(error => {
+          console.error(error);
+          result.textContent = "An error occurred while detecting AI text";
+        });
+        console.log(input);
+
+      });
+    </script>
+  </body>
+</html>
